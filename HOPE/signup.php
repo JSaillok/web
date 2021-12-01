@@ -1,6 +1,6 @@
 <?php include "refs.php";?>
 <div class="container">
-   <!-- signUp.inc : the user does not see the file, it just has the basic php script that runs-->
+   <!-- signup.inc : the user does not see the file, it just has the basic php script that runs-->
    <!-- The action attribute specifies where to send the form-data when a form is submitted. -->
       <form action="includes/signup.inc.php" method="post">
          <div class="form-content">

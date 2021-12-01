@@ -23,11 +23,9 @@ function invalidUsername($username){
    return $result;
 }
 
-function invalidEmail($email){
+function invalidPwd($password){
    $result;
-   //The filter_var() function filters a variable with the specified filter.
-   // FILTER_VALIDATE_EMAIL to validate email
-   if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+   if (!preg_match("/^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/",$password))  {
       $result = TRUE;
    }
    else{
@@ -36,9 +34,11 @@ function invalidEmail($email){
    return $result;
 }
 
-function invalidPwd($password){
+function invalidEmail($email){
    $result;
-   if (!preg_match("/^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/",$password))  {
+   //The filter_var() function filters a variable with the specified filter.
+   // FILTER_VALIDATE_EMAIL to validate email
+   if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
       $result = TRUE;
    }
    else{
@@ -142,6 +142,7 @@ function loginUser($conn, $username, $password){
       //starting session so user data is saved in the website
       session_start();
       $_SESSION["id"] = $userExists["id"];
+      $_SESSION["username"] = $userExists["username"];
       header("location: ../index.php");
       exit();
    }

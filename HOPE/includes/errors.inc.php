@@ -9,7 +9,7 @@ if (isset($_GET["error"])){
    else if ($_GET["error"] == "invalidEmail"){
       echo "<p class='error'> Choose a valid email!</p>";
    }
-   else if ($_GET["error"] == "invalidPwd"){
+   else if ($_GET["error"] == "invalidPassword"){
       echo "<p class='error'> Try another password! Minimum 8 chars, 1 capital, 1 digit, 1 special character.</p>";
    }
    else if ($_GET["error"] == "passwordsUnmached"){
@@ -21,10 +21,11 @@ if (isset($_GET["error"])){
    else if ($_GET["error"] == "stmtFailed"){
       echo "<p class='error'> Something went wrong! Please try again!</p>";
    }
-   else if ($_GET["error"] == "error=wrongUserlogin"){
+   else if ($_GET["error"] == "wrongUserlogin"){
       echo "<p class='error'> Wrong username! </p>";
    }
-   else if ($_GET["error"] == "error=wrongPasslogin"){
+   else if ($_GET["error"] == "wrongPasslogin"){
       echo "<p class='error'> Wrong password! </p>";
    }
 }
+

@@ -2,6 +2,11 @@
 include_once 'header.php'
 ?>
       <section class="index-intro">
+         <?php 
+            if (isset($_SESSION["id"])){
+               echo "<p> Hello there ". $_SESSION["username"]."!</p>" ;
+            }
+            ?>
          <h1>Introduction</h1>
          <p>Paragraph</p>
       </section>
