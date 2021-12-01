@@ -31,8 +31,8 @@ if (isset($_POST['submit'])){
       header("location: ../signup.php?error=invalidEmail");
       exit();
    }
-   if(invalidPwd($password) !==FALSE){
-      header("location: ../signup.php?error=AnotherPassword");
+   if(invalidPwd($password) !== FALSE){
+      header("location: ../signup.php?error=InvalidPassword");
    }
    if(passwordMatch($password, $cpassword) !== FALSE){
       //confirm matching passwords

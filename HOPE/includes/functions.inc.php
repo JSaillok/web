@@ -38,7 +38,7 @@ function invalidEmail($email){
 
 function invalidPwd($password){
    $result;
-   if (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/", $password)){
+   if (!preg_match("/^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/",$password))  {
       $result = TRUE;
    }
    else{
