@@ -9,6 +9,9 @@ if (isset($_GET["error"])){
    else if ($_GET["error"] == "invalidEmail"){
       echo "<p class='error'> Choose a valid email!</p>";
    }
+   else if ($_GET["error"] == "invalidPwd"){
+      echo "<p class='error'> Try another password! Minimum 8 chars, 1 capital, 1 digit, 1 special character.</p>";
+   }
    else if ($_GET["error"] == "passwordsUnmached"){
       echo "<p class='error'> Passwords don't match!</p>";
    }
