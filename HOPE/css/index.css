@@ -1,0 +1,123 @@
+@import url("https://fonts.googleapis.com/css2?family=Courgette&family=Montserrat:wght@500&family=Roboto&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box; /*The width and height properties (and min/max properties) includes content, padding and border*/
+}
+body {
+  font-family: Montserrat, sans-serif;
+}
+nav {
+  background: #63d4e3;
+  height: 80px;
+  width: 100%;
+  border: 2px solid #54afbb;
+}
+label.logo {
+  color: white;
+  font-size: 30px;
+  line-height: 80px;
+  padding: 0 50px;
+  font-weight: bold;
+}
+nav ul {
+  float: right;
+  margin-right: 40px;
+}
+nav ul li {
+  display: inline-block; /*display: inline-block is to display list items horizontally instead of vertically. */
+  line-height: 80px;
+  margin: 0 5px;
+}
+nav ul li a {
+  color: white;
+  font-size: 17px;
+  padding: 7px 13px;
+  text-transform: capitalize;
+}
+a.active,
+a:hover {
+  background: none;
+  color: #8257b2;
+  transition: 0.5s ease;
+}
+.welcome {
+  position: absolute;
+  top: 80px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background: #3bacbb;
+  color: white;
+  margin: 0;
+  z-index: -1;
+  color: #8257b2;
+}
+
+nav #icon {
+  color: white;
+  font-size: 20px;
+  line-height: 80px;
+  float: right;
+  margin-right: 40px;
+  cursor: pointer;
+  display: none;
+}
+@media (max-width: 1048px) {
+  label.logo {
+    font-size: 30px;
+    padding-left: 50px;
+  }
+  nav ul {
+    margin-right: 20px;
+  }
+  nav ul li a {
+    font-size: 16px;
+  }
+}
+@media (max-width: 909px) {
+  nav #icon {
+    display: block;
+  }
+  nav ul.show {
+    right: 0;
+    width: 100%;
+  }
+  nav ul {
+    width: 0;
+    height: 100vh;
+    position: fixed;
+    background: #8257b2;
+    top: 80px;
+    right: 0;
+    margin-right: 0;
+    text-align: center;
+    transition: all 0.5s linear;
+  }
+  nav ul li {
+    display: block;
+    margin: 50px 0;
+    line-height: 30px;
+  }
+  nav ul li a {
+    font-size: 20px;
+  }
+  a:hover,
+  a.active {
+    background: none;
+    color: #54afbb;
+  }
+}
+#map {
+  position: absolute;
+  top: 125px;
+  width: 100%;
+  height: 85vh;
+  z-index: -1;
+  margin: 0px;
+}

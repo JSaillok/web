@@ -143,6 +143,8 @@ function loginUser($conn, $username, $password){
       session_start();
       $_SESSION["id"] = $userExists["id"];
       $_SESSION["username"] = $userExists["username"];
+      $_SESSION["lat"] = $userExists["lat"];
+      $_SESSION["lat"] = $userExists["lng"];
       header("location: ../index.php");
       exit();
    }
