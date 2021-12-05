@@ -1,6 +1,6 @@
 // L= leaflet library class object
 //initialize the map and set its view to our chosen geographical coordinates and a zoom level
-let map=L.map('map').setView([38.2397, 21.7534], 13);//setView(latitude, longitude, zoom level),setView call also returns the map object
+let map=L.map('map');//setView(latitude, longitude, zoom level),setView call also returns the map object
 //{s}: style, {z}: zoom level, {x}:latitude, {y}:longitude
 //Creating a tile layer by setting the URL template for the tile images, the attribution text, and the maximum zoom level of the layer
 let tileURL ='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -12,7 +12,26 @@ let tiles = L.tileLayer(tileURL, {attribution});
 //add a tile layer to add to our map
 tiles.addTo(map);
 
-L.marker([38.26261, 21.75451]).addTo(map);
+//Geolocation
+if("geolocation" in navigator){
+navigator.geolocation.getCurrentPosition(function(position){
+   const lat = position.coords.latitude;
+   const lng = position.coords.longitude;
+   console.log(position);
+   let marker = L.marker([lat, lng]).addTo(map);
+   map.setView([lat, lng], 14);
+   marker.bindPopup("<b>Your are here! </b> <br>"+ lat.toString()+","+lng.toString());
+});
+}else{
+   console.log("geolocation not available")
+}
+
+marker.on("click", markerClick);
+function markerClick(event) {
+this.getPopup()
+.setLatLng(event.latlng)
+.setContent("Συντεταγμένες σημείου: " + event.latlng.toString());
+}
 
 // const api_url = "https://api.openstreetmap.org/api/0.6/map?bbox=<min long>, <min lat>, <max long>, <max lat>";
 

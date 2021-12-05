@@ -5,7 +5,7 @@ include_once 'header.php'
          <?php 
             if (isset($_SESSION["id"])){
                echo "<p class='welcome'> Hello there ". $_SESSION["username"]."!</p>" ;
-               $lat = $_SESSION["lat"]
+               $lat = $_SESSION["lat"];
             }
             ?>
       </section>
