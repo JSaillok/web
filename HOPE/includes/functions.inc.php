@@ -89,7 +89,7 @@ function userExists($conn, $username, $email) {
 
 function createUser($conn, $username, $email, $password) {
    //? = placeholder
-   $sql = "INSERT INTO users (username, email, password) VALUES(?,?,?);";
+   $sql = "INSERT INTO users (username, email, password, role) VALUES(?,?,?,0);";
    //initializes the prepared statement for safety
    $stmt = mysqli_stmt_init($conn);
    //runs the statement inside the database to check for errors
@@ -143,9 +143,11 @@ function loginUser($conn, $username, $password){
       session_start();
       $_SESSION["id"] = $userExists["id"];
       $_SESSION["username"] = $userExists["username"];
-      $_SESSION["lat"] = $userExists["lat"];
-      $_SESSION["lat"] = $userExists["lng"];
-      header("location: ../index.php");
+      $_SESSION["role"] = $userExists["role"];
+      if ($_SESSION["role"] ==  0)
+         header("location: ../index.php");
+      else
+         header("location: ../adminHome.php");
       exit();
    }
 }

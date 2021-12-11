@@ -10,9 +10,8 @@ const links = document.querySelector('.nav-links');
 const currentLocation = location.href;
 const menuItem = document.querySelectorAll('a');
 const menuLength = menuItem.length;
-console.log(currentLocation);
 for (let i = 0; i<menuLength; i++){
-   console.log(menuItem[i])
+   // console.log(menuItem[i])
    if (menuItem[i].href === currentLocation){
       menuItem[i].className = "active"
    }

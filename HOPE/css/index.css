@@ -9,6 +9,7 @@
 }
 body {
   font-family: Montserrat, sans-serif;
+  background: #9763d3;
 }
 nav {
   background: #63d4e3;
@@ -35,7 +36,7 @@ nav ul li {
 nav ul li a {
   color: white;
   font-size: 17px;
-  padding: 7px 13px;
+  padding: 7px 7px;
   text-transform: capitalize;
 }
 a.active,
@@ -71,7 +72,7 @@ nav #icon {
 @media (max-width: 1048px) {
   label.logo {
     font-size: 30px;
-    padding-left: 50px;
+    padding-left: 30px;
   }
   nav ul {
     margin-right: 20px;
@@ -86,7 +87,7 @@ nav #icon {
   }
   nav ul.show {
     right: 0;
-    width: 100%;
+    width: 35%;
   }
   nav ul {
     width: 0;
@@ -120,4 +121,74 @@ nav #icon {
   height: 86.4vh;
   z-index: -1;
   margin: 0px;
+}
+input[type="file"] {
+  display: none;
+}
+.upload-button {
+  color: white;
+  height: 50px;
+  width: 200px;
+  background-color: #54afbb;
+  position: absolute;
+  margin: auto;
+  cursor: pointer;
+  top: -100px;
+  left: 0px;
+  bottom: 0;
+  right: 0;
+  font-size: 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+.upload-button:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.delete-button {
+  color: white;
+  height: 50px;
+  width: 200px;
+  background-color: #54afbb;
+  position: absolute;
+  margin: auto;
+  cursor: pointer;
+  top: 300px;
+  left: 0px;
+  bottom: 0;
+  right: 0;
+  font-size: 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.delete-button:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+#upload {
+  color: white;
+  height: 50px;
+  width: 100px;
+  background-color: #54afbb;
+  position: absolute;
+  margin: auto;
+  cursor: pointer;
+  top: 50px;
+  left: 0px;
+  bottom: 0;
+  right: 0;
+  font-size: 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }

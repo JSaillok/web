@@ -1,10 +1,12 @@
-<?php
-if(isset($_POST["submit"])){
-   $usernameOrEmail = $_POST["usernameOremail"];
-   $password = $_POST["password"];
+<?php 
+require_once "config.inc.php";
+require_once "functions.inc.php";
 
-   require_once "config.inc.php";
-   require_once "functions.inc.php";
+if(isset($_POST["submit"])){
+   $usernameOrEmail = mysqli_real_escape_string($conn, $_POST["usernameOremail"]);
+   $password = mysqli_real_escape_string($conn, $_POST["password"]);
+
+   
 
    //ERROR HANDLERS
    //anything else than FALSE

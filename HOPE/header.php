@@ -13,7 +13,12 @@
    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="crossorigin=""/>
    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="crossorigin=""></script>
-   <title>Index</title>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <link rel ="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-search/2.9.8/leaflet-search.min.css"/>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-search/2.9.8/leaflet-search.src.js"> </script>
+   <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js"></script>
+   <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js"></script>
+   
 </head>
 <body>
    <nav>
@@ -22,14 +27,18 @@
          <li><a  href="index.php">Home</a></li>
          <li><a  href="maps.php">Maps</a></li>
          <li><a  href="graphs.php">Graphs</a></li>
+         
          <?php 
-         if (isset($_SESSION["id"])){
-         echo "<li><a href='profile.php'>Profile</a></li>";
-         echo "<li><a href='includes/logout.inc.php'>Log Out</a></li>";
+         if ($_SESSION["role"] == 0){
+            echo  "<li><a  href='visits.php'>visits</a></li>";
+            echo "<li><a  href='covid_case.php'>covid case</a></li>";
+            echo "<li><a href='profile.php'>Profile</a></li>";
+            echo "<li><a href='includes/logout.inc.php'>Log Out</a></li>";
          }
          else{
-            echo "<li><a href='signup.php''>Sign Up</a></li>";
-            echo "<li><a href='login.php'>Log In</a></li>";
+            echo "<li><a href='uploadData.php'>Upload Data</a></li>";
+            echo "<li><a href='profile.php'>Profile </a></li>";
+            echo "<li><a href='includes/logout.inc.php'>Log Out</a></li>";
          }
          ?>
       </ul> 

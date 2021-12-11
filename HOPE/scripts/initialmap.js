@@ -26,12 +26,12 @@ navigator.geolocation.getCurrentPosition(function(position){
    console.log("geolocation not available")
 }
 
-marker.on("click", markerClick);
-function markerClick(event) {
-this.getPopup()
-.setLatLng(event.latlng)
-.setContent("Συντεταγμένες σημείου: " + event.latlng.toString());
-}
+// marker.on("click", markerClick);
+// function markerClick(event) {
+// this.getPopup()
+// .setLatLng(event.latlng)
+// .setContent("Συντεταγμένες σημείου: " + event.latlng.toString());
+// }
 
 // const api_url = "https://api.openstreetmap.org/api/0.6/map?bbox=<min long>, <min lat>, <max long>, <max lat>";
 

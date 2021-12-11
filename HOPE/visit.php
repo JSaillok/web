@@ -2,8 +2,11 @@
 include_once 'header.php'
 ?>
 <head>
-   <title>Graphs</title>
+   <title>Vistiations</title>
 </head>
+<body>
+   
+</body>
 <?php 
 include_once 'footer.php'
 ?>

@@ -1,7 +1,9 @@
 <?php 
 include_once 'header.php'
 ?>
-   <script src="scripts/initialmap.js"></script>
+<head>
+   <title>Profile Page</title>
+</head>
 <?php 
-include_once 'header.php'
+include_once 'footer.php'
 ?>
