@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200s;300;400;500;600");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #c36fae;
+  padding: 30px;
+}
+.error {
+  color: red;
+}
+.container {
+  max-width: 450px;
+  width: 100%;
+  background: #fff;
+  padding: 40px 30px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+.container .form {
+  height: 100%;
+  width: 100%;
+  background: #fff;
+}
+form {
+  border: none;
+}
+.container .form-content {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+}
+form .form-content .title {
+  position: relative;
+  font-size: 24px;
+  font-weight: 500;
+  color: #333;
+}
+form .form-content .title:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 60px;
+  background: #c36fae;
+}
+form .signup-form .form-content .title:before {
+  width: 20px;
+}
+form .form-content .input-boxes {
+  margin-top: 30px;
+}
+form .form-content .input-box {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  margin: 10px 0;
+  position: relative;
+}
+.form-content .input-box input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  padding: 0 30px;
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+/* .form-content .input-box input:focus,
+.form-content .input-box input:valid { */
+/* required input - > valid  */
+/* border-color: #c36fae;
+} */
+.form-content .input-box i {
+  position: absolute;
+  color: #c36fae;
+  font-size: 16px;
+}
+form .form-content .text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+form .form-content .button {
+  color: #fff;
+  margin-top: 40px;
+}
+form .form-content .button input {
+  color: #fff;
+  background: #c36fae;
+  border-radius: 10px;
+  padding: 0;
+  cursor: pointer;
+}
+form .form-content .button input:hover {
+  background: #f6b5e6;
+}
+form .form-content label {
+  color: #c36fae;
+  cursor: pointer;
+}
+form .form-content label:hover {
+  text-decoration: underline;
+}
