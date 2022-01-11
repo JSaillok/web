@@ -8,6 +8,10 @@
   box-sizing: border-box; /*The width and height properties (and min/max properties) includes content, padding and border*/
 }
 body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   font-family: Montserrat, sans-serif;
   background: #9763d3;
 }
@@ -15,7 +19,7 @@ nav {
   background: #63d4e3;
   height: 80px;
   width: 100%;
-  border: 2px solid #54afbb;
+  border-bottom: 2px solid #77b7ff;
 }
 label.logo {
   color: white;
@@ -35,6 +39,7 @@ nav ul li {
 }
 nav ul li a {
   color: white;
+  font-weight: bold;
   font-size: 17px;
   padding: 7px 7px;
   text-transform: capitalize;
@@ -45,19 +50,20 @@ a:hover {
   color: #8257b2;
   transition: 0.5s ease;
 }
-.welcome {
-  position: absolute;
-  top: 80px;
-  padding: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.index-intro {
   width: 100%;
-  background: #3bacbb;
-  color: white;
+  text-align: center;
+}
+.welcome {
+  font-weight: bold;
+  top: 78px;
+  padding: 14px;
+  width: 100%;
+  background: #3bbead;
   margin: 0;
   z-index: -1;
   color: #8257b2;
+  border-bottom: 2px solid #77b7ff;
 }
 
 nav #icon {
@@ -88,6 +94,7 @@ nav #icon {
   nav ul.show {
     right: 0;
     width: 35%;
+    z-index: 2;
   }
   nav ul {
     width: 0;
@@ -106,7 +113,7 @@ nav #icon {
     line-height: 30px;
   }
   nav ul li a {
-    font-size: 20px;
+    font-size: 16px;
   }
   a:hover,
   a.active {
@@ -122,10 +129,13 @@ nav #icon {
   z-index: -1;
   margin: 0px;
 }
+
+/* Admin upload */
 input[type="file"] {
   display: none;
 }
 .upload-button {
+  border: none;
   color: white;
   height: 50px;
   width: 200px;
@@ -145,20 +155,20 @@ input[type="file"] {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 .upload-button:hover {
-  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
-    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.2), 0 17px 50px 0 rgba(0, 0, 0, 0.3);
 }
 
 .delete-button {
+  border: none;
   color: white;
   height: 50px;
-  width: 200px;
+  width: 160px;
   background-color: #54afbb;
   position: absolute;
   margin: auto;
   cursor: pointer;
   top: 300px;
-  left: 0px;
+  left: -50px;
   bottom: 0;
   right: 0;
   font-size: 17px;
@@ -170,19 +180,19 @@ input[type="file"] {
 }
 
 .delete-button:hover {
-  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
-    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.2), 0 17px 50px 0 rgba(0, 0, 0, 0.3);
 }
 #upload {
+  border: none;
   color: white;
   height: 50px;
-  width: 100px;
+  width: 130px;
   background-color: #54afbb;
   position: absolute;
   margin: auto;
   cursor: pointer;
   top: 50px;
-  left: 0px;
+  left: -70px;
   bottom: 0;
   right: 0;
   font-size: 17px;
@@ -191,4 +201,113 @@ input[type="file"] {
   align-items: center;
   border-radius: 10px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+#upload:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.3), 0 17px 50px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Profile Management */
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 450px;
+  width: 100%;
+  background: rgb(255, 255, 255);
+  padding: 40px 30px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  position: absolute;
+  top: 100px;
+}
+.container .form {
+  height: 100%;
+  width: 100%;
+  background: #fff;
+}
+form {
+  border: none;
+}
+.container .form-content {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  /* flex-direction: column; */
+}
+form .form-content .title {
+  position: relative;
+  font-size: 24px;
+  font-weight: 500;
+  color: #333;
+}
+form .form-content .title:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 60px;
+  background: #e75e4b;
+}
+form .signup-form .form-content .title:before {
+  width: 20px;
+}
+form .form-content .input-boxes {
+  margin-top: 30px;
+}
+form .form-content .input-box {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  margin: 10px 0;
+  position: relative;
+}
+.form-content .input-box input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  padding: 0 30px;
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+/* .form-content .input-box input:focus,
+.form-content .input-box input:valid {  */
+/*required input - > valid  */
+/* border-color: #c36fae;
+}  */
+.form-content .input-box i {
+  position: absolute;
+  color: #7e52a0;
+  font-size: 16px;
+}
+form .form-content .text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+form .form-content button {
+  color: #fff;
+  background: #e75e4b;
+  border-radius: 10px;
+  padding: 0;
+  cursor: pointer;
+  margin-top: 30px;
+  width: 250px;
+  height: 50px;
+  border: none;
+  font-size: 1.2rem;
+}
+form .form-content button:hover {
+  background: #eb796a;
+}
+#error {
+  margin-top: 5px;
+  height: 20px;
+  color: red;
+  font-size: 14px;
 }

@@ -25,25 +25,3 @@ navigator.geolocation.getCurrentPosition(function(position){
 }else{
    console.log("geolocation not available")
 }
-
-// marker.on("click", markerClick);
-// function markerClick(event) {
-// this.getPopup()
-// .setLatLng(event.latlng)
-// .setContent("Συντεταγμένες σημείου: " + event.latlng.toString());
-// }
-
-// const api_url = "https://api.openstreetmap.org/api/0.6/map?bbox=<min long>, <min lat>, <max long>, <max lat>";
-
-// async function getdata(){
-//    const response = await fetch(api_url);
-//    const data = await response.json();
-//    const {latitude, longitude} = data;
-
-   
-//    L.marker([latitude, longitude]).addTo(mymap);
-
-//    document.getElementById("lat").te
-// }
-
-// getdata();

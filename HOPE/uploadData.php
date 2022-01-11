@@ -13,11 +13,9 @@ include_once 'header.php';
    </section>
       <input type='file' id='file' class= "upload-button" accept='.json ' onchange="readFile(this)"/>
       <label class= "upload-button" for="file">Choose a File...</label>
-      <button id = "upload"> Upload </button>
-
-      <input type="submit" class="delete-button" name="Delete" value="Delete All" />
-
+      <button id = "upload"> Upload &nbsp; <i class="fas fa-upload"></i> </button>
+      <button id = "delete" class="delete-button"> Delete All &nbsp; <i class="fas fa-trash-alt"></i> </button>
       <script src="scripts/dataMan.js"></script>
-<?php 
+<?php
 include_once 'footer.php';
 ?>

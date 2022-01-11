@@ -6,26 +6,32 @@ function readFile(input){
       //convert to js object
       const data = JSON.parse(e.currentTarget.result);//object
       console.log(e.currentTarget.result);
-      console.log(typeof data);
-      console.log(typeof file);//object
       const p = JSON.stringify(e.currentTarget.result); //string
-      console.log(typeof p);
+
 
    $("#upload").click(function() {
       console.log(data);
       const result = $.ajax({
          url: 'includes/json.php',
-         dataType: 'json',
          method: 'POST',
-         data: p,
-         contentType:'application/json',
-         processData: false,
-         success: function(res){
+         data: {q:e.currentTarget.result},
+         success: function(response){
             console.log("Clicked");
-            console.log(res);
+            console.log(response);
          }
       });
       console.log(result);
       });
    }
 }
+0
+$('#delete').click(function(){
+$.ajax({
+      type: 'POST',
+      url: 'includes/deleteAll.php',
+      data: {delete : true},
+      success: function(response) {
+         console.log(response);
+      }
+   });
+});

@@ -19,14 +19,7 @@ if ($result->num_rows > 0) {
       array_push($result_array, $row);
       }
 }
-
 /* send a JSON encded array to client */
-// header('Content-type: application/json');
 echo json_encode($result_array);}
 
-
-// echo (gettype($result_array));
-// echo (gettype($data));
-// echo $data;
-// echo (gettype($data));
 $conn->close();
