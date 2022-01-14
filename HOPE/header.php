@@ -26,7 +26,6 @@
       <ul class="nav-links">
          <li><a  href="index.php">Home</a></li>
          <li><a  href="maps.php">Maps</a></li>
-         <li><a  href="graphs.php">Graphs</a></li>
          
          <?php 
          if ($_SESSION["role"] == 0){
@@ -37,6 +36,7 @@
          }
          else{
             echo "<li><a href='uploadData.php'>Upload Data</a></li>";
+            echo "<li><a href='graphs.php'>Graphs</a></li>";
             echo "<li><a href='profile.php'>Profile </a></li>";
             echo "<li><a href='includes/logout.inc.php'>Log Out</a></li>";
          }

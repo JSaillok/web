@@ -1,5 +1,13 @@
 // L= leaflet library class object
 //initialize the map and set its view to our chosen geographical coordinates and a zoom level
+var current_date = new Date();
+console.log(current_date);
+
+var current_day = current_date.toLocaleString('en-us', {
+   weekday: 'long'
+});
+console.log(current_day);
+
 let map=L.map('map');//setView(latitude, longitude, zoom level),setView call also returns the map object
 //{s}: style, {z}: zoom level, {x}:latitude, {y}:longitude
 //Creating a tile layer by setting the URL template for the tile images, the attribution text, and the maximum zoom level of the layer

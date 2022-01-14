@@ -1,6 +1,23 @@
 const btn = document.querySelector(".btn");
 
-function profile_manage(){
+function check(password){
+
+    let pwdflag = false;
+
+		for(var j=0;j<password.length;j++){
+
+      if(password.match(/^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/))
+      {
+      pwdflag = true;
+      }
+		}
+    return pwdflag;
+}
+
+function change_info(){
+
+  event.preventDefault();
+
     let username = $("input[name = username]").val();
     let old_password = $("input[name = oldPassword]").val();
     let new_password = $("input[name = newPassword]").val();
@@ -8,14 +25,15 @@ function profile_manage(){
     
   console.log(username);
 
-  if (new_password!= new_password2){
-      document.getElementById("error").textContent = "Passwords don't match!";
+
+ if (new_password!= new_password2){
+      document.getElementById("error").innerHTML = "Passwords don't match!";
+  }
+  else if (!check(new_password)){
+  document.getElementById("error").innerHTML = "Try another password! Minimum 8 chars, 1 capital, 1 digit, 1 special character.";
   }
   else{
-    // $("input[name=username]").val();
-		// $("input[name=oldPassword]").val();
-		// $("input[name=newPassword]").val();
-
+    
     const change = $.ajax({
       url:'includes/profileCheck.inc.php',
       type: 'POST',
@@ -24,18 +42,19 @@ function profile_manage(){
     });
     change.done(onsuccess);
 
-  $('form').on('submit', function(event) {
+    $('#form').submit(function(event) {
     event.preventDefault();
-  });
+    });
+
 }
 function onsuccess(response){
-    if (response == "shit" ){
+    if (response == "Old Password Wrong" ){
       console.log(response);
-        document.getElementById("error").innerHTML = "Passwords must be...!";
+        document.getElementById("error").innerHTML = "Old Password Error";
         //check for password format !!!!!!
     // window.location.assign("profile.php");
     }
-    else if(response == 'Done'|| response == 'Password changed'){
+    else if(response == 'Old Password Match'|| response == 'Password changed'){
       console.log(response);
       document.getElementById("error").innerHTML = "Successfull change of credentials!";
       // window.location.assign("index.php");

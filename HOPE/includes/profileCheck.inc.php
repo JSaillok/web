@@ -2,7 +2,7 @@
 session_start();
 include "config.inc.php";
 //post ajax
-
+if(isset($_SESSION['id'])){
   $username = $_POST['username'];
   $oldPassword = $_POST['oldPassword'];
   $newPassword = $_POST['newPassword'];
@@ -33,15 +33,16 @@ include "config.inc.php";
     if(password_verify($oldPassword, $user_pass)){
       $pass = password_hash($newPassword, PASSWORD_DEFAULT);
       mysqli_query($conn,"UPDATE users SET username = '$username', password ='$pass' WHERE id = '$id'");
-      echo "Done";
+      echo "Old Password Match";
     }
     else{
-      echo "shit";
+      echo "Old Password Wrong";
     }
   } 
   elseif(mysqli_num_rows($exists)!==0 && $id == $user_id){//if username is old change only password
     $pass = password_hash($password,PASSWORD_DEFAULT);
     mysqli_query($conn,"UPDATE users SET password = '$pass' WHERE id = '$id'");
-    echo "Password changed";
+    echo "Only Password changed";
   }
 
+}

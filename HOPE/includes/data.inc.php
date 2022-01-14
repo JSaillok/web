@@ -9,8 +9,8 @@ if ($conn->connect_error) {
       die("Connection to database failed: " . $conn->connect_error);
 }
 /* SQL query to get results from database */
-$sql = "SELECT id, name, address, lat, lng, rating, n_rating, types
-FROM pois WHERE types LIKE '%".$Oti."%';";
+$sql = "SELECT id, name, address, lat, lng, types
+FROM pois WHERE types LIKE '".$Oti."%' OR name LIKE '".$Oti."%';";
 // $sql = "SELECT * FROM users;";
 $result = $conn->query($sql);
 /* If there are results from database push to result array */

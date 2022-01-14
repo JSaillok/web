@@ -1,12 +1,20 @@
 // L= leaflet library class object
 //get the date for the current user
 var current_date = new Date();
-//get day
 console.log(current_date);
+
+//get day
 var current_day = current_date.toLocaleString('en-us', {
    weekday: 'long'
 });
 console.log(current_day);
+
+// var today = new Date();
+// var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+// var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+// var current_date = date+' '+time;
+
+// console.log(current_date);
 
 //create layerGroup
 var markers = new L.layerGroup();
@@ -25,118 +33,16 @@ if("geolocation" in navigator){
    const lat = position.coords.latitude;
    const lng = position.coords.longitude;
    // console.log(position);
-   let singleMarker = L.marker([lat, lng]).addTo(map);
-   map.setView([lat, lng], 14);//setView(latitude, longitude, zoom level),setView call also returns the map object
+   let singleMarker = L.marker([38.2362409, 21.7303368], {icon: blue}).addTo(map);
+   map.setView([38.2362409, 21.7303368], 14);//setView(latitude, longitude, zoom level),setView call also returns the map object
    //{s}: style, {z}: zoom level, {x}:latitude, {y}:longitude
-   singleMarker.bindPopup("<b>Your are here! </b> <br>"+ lat.toString()+","+lng.toString()+ "<br>" + popupContent);
-   var popupContent = "Click here to register your visit." + '<a class="smallPolygonLink" href="visitation.php"></a>';
+   singleMarker.bindPopup("<b>Your are here! </b> <br>"+ lat.toString()+","+lng.toString()+ "<br>");
    // singleMarker.bindPopup(popupContent);
    markers.addLayer(singleMarker);
-   // $('<a href="#" class="speciallink">TestLink</a>').click(function() {
-   //  alert("test");})[0];
 });
 }else{
    console.log("geolocation api not available in this browser.")
 }
-
-let Search = new L.Control.Search(
-   {sourceData: searchByAjax, 
-   position: "topright",
-   delayType: 1500,
-   collapsed: false,
-   textPlaceholder: 'Search...',
-   hideMarkerOnCollapse: true,
-   markerLocation: true,
-   autoType: true,
-   }
-)
-map.addControl(Search);
-map.addLayer(markers);
-
-Search.on('search:collapsed', () => {
-   markers.clearLayers();
-   console.log();
-})
-
-//filterData options for control search
-function searchByAjax(text, callResponse){//callback for 3rd party ajax requests
-      console.log(text);
-      const result = $.ajax({
-         url: 'includes/data.inc.php?=q',
-         type: 'POST',
-         data: {q: text},
-         dataType: 'json',
-         success: function(data) {
-            callResponse(data);
-            console.log(data);
-         }
-      });
-
-   result.done(getHours); 
-   
-   function getHours(response){
-      // console.log(response[1].name);
-      let name = [];
-      let address = [];
-      let lat = [];
-      let lng = [];
-      let ids = [];
-
-      for(let i=0; i<response.length; i++){
-         name.push(response[i].name);
-         address.push(response[i].address);
-         lat.push(response[i].lat);
-         lng.push(response[i].lng);
-         ids.push(response[i].id);
-      }
-      
-         const h = $.ajax({
-         url: 'includes/popEst.inc.php',
-         type: 'POST',
-         data: {q: current_day, ids : ids},
-         // dataType: 'text',
-         success: function(data) {
-            // callResponse(json);
-            console.log(data);
-            hours = JSON.parse(data);
-
-            if (response.length == hours.length){
-
-               for(let i=0; i<hours.length; i++){
-                  let Hours = [];
-                  Hours = Object.values(hours[i]);
-                  // console.log(Hours);
-                  let pop = [];
-                  pop.push(Hours[current_date.getHours()+1], Hours[current_date.getHours()+2], Hours[current_date.getHours()+3]);
-
-                  let estimate = calcPop(pop);
-
-                  if (estimate >= 0 && estimate <= 32) {
-				         var marker = L.marker(L.latLng(lat[i], lng[i]), {icon: green}).addTo(map);
-				      } 
-                  else if (estimate >= 33 && estimate <= 65) {
-					      var marker = L.marker(L.latLng(lat[i], lng[i]), {icon: orange}).addTo(map);
-				      } 
-                  else if (estimate >= 66) {
-					      var marker = L.marker(L.latLng(lat[i], lng[i]), {icon: red}).addTo(map);
-				      } 
-                  else {
-			            var marker = L.marker(L.latLng(lat[i], lng[i]), {icon: blue}).addTo(map);
-				      } 
-
-                  marker.bindPopup( name[i] + "<br>   Address : "+ address[i]+ "<br> Average visitors in the next two hours : "+ calcPop(pop));
-                  markers.addLayer(marker);
-               }
-            }
-         }
-      });
-   }  
-}
-
-function calcPop(pop){
-         est = Math.round(pop.reduce((a, b) => a + b) / pop.length);
-         return est; 
-      }
 
 const green = L.icon({
 		iconUrl: 'img/green.png',
@@ -162,6 +68,193 @@ const green = L.icon({
 		iconAnchor: [20, 0]
 	});
 
+let Search = new L.Control.Search(
+   {
+   url: 'includes/dataSearch.php?q={s}',
+   sourceData: searchByAjax, 
+   position: "topright",
+   propertyName: 'name',
+   delayType: 500,
+   initial:false,
+   collapsed: false,
+   textPlaceholder: 'Search...',
+   autoType: false,
+   autoCollapse: false,
+   marker: false,
+   moveToLocation: function(latLng, title, map){
+      map.setView([latLng.lat,latLng.lng], 19);
+      }
+   }
+)
+map.addControl(Search);
+map.addLayer(markers);
+
+Search.on('search:collapsed', () => {
+   markers.clearLayers();
+});
+
+// console.log(dateFormat(current_date));
+
+//filterData options for control search
+function searchByAjax(text, callResponse){//callback for 3rd party ajax requests
+   
+      console.log(text);
+      const result = $.ajax({
+         url: 'includes/dataSearch.php?=q',
+         type: 'POST',
+         data: {q: text},
+         dataType: 'json',
+         success: function(data) {
+            callResponse(data);
+            console.log(data);
+         }
+    });
 
 
+result.done(onsuccess);
+console.log(result);
+
+function onsuccess(response){
+
+  let name = [];
+  let address = [];
+  let lat = [];
+  let lng = [];
+  let ids = [];
+
+  for(let i=0; i<response.length; i++){
+      name.push(response[i].name);
+      address.push(response[i].address);
+      lat.push(response[i].loc.lat);
+      lng.push(response[i].loc.lng);
+      ids.push(response[i].id);
+  }
+
+  const h = $.ajax({
+         url: 'includes/popEst.inc.php',
+         type: 'POST',
+         data: {q: current_day, ids : ids},
+         dataType: 'json',
+         success: function(hours) {
+            console.log(hours);
+            if (response.length == hours.length){
+               console.log('hello');
+               console.log(name);
+               console.log(lat);
+               console.log(lng);
+
+  for (let i=0; i<response.length; i++){
+    let Hours = [];
+                  
+    Hours = Object.values(hours[i]);
+
+    console.log(Hours);
+                  
+    let pop = [];
+    pop.push(Hours[current_date.getHours()+1], Hours[current_date.getHours()+2], Hours[current_date.getHours()+3]);
+
+    let estimate = calcPop(pop);
+
+          if (estimate >= 0 && estimate <= 32) {
+				         var marker = L.marker(L.latLng(lat[i], lng[i]), {icon: green});
+				      } 
+                  else if (estimate >= 33 && estimate <= 65) {
+					      var marker = L.marker(L.latLng(lat[i], lng[i]), {icon: orange});
+				      } 
+                  else if (estimate >= 66) {
+					      var marker = L.marker(L.latLng(lat[i], lng[i]), {icon: red});
+				      } 
+                  else {
+			            var marker = L.marker(L.latLng(lat[i], lng[i]), {icon: blue});
+				      }
+		if (getDistance(38.2362409, 21.7303368, response[i].loc.lat, response[i].loc.lng)<=0.2){			
+        var container = $('<div />');
+					container.html(`
+          <p for="name"> ${response[i].name}</p>
+					<p for="address">${response[i].address}</p>
+          <p> To register your visit here click <b>submit. </p>
+					<label>Enter an estimation of visitors:</label>
+					<input id="est" type="number" min="0"/>
+					<button class="sumbit" type="submit">Sumbit</button>`);
+
+      marker.bindPopup(container[0]);
+
+      container.on('click','.sumbit', function(event){
+        let num =  $('#est').val();
+        console.log('ho');
+        handleSubmit(response, i, num, event);
+      });
+    }
+    else{
+       marker.bindPopup( name[i] + "<br>   Address : "+ address[i]+ "<br> Average visitors in the next two hours : "+ calcPop(pop));
+    }
+      markers.addLayer(marker);
+      }
+    }
+  }
+});
+}
+}
+
+function handleSubmit(response, i, num, event){
+
+    event.preventDefault();
+    
+    console.log(response[i].id);
+    json = {};
+    json.poi_id=response[i].id;
+    json.poi_name=response[i].name;
+    json.visit_date = current_date.toISOString().slice(0, 19).replace('T', ' ');
+    json.lat = response[i].loc.lat;
+    json.lng = response[i].loc.lng;
+    json.est = num;
+    console.log(json);
+    
+    const register = $.ajax({
+			url: 'includes/visit.inc.php?=json',
+			method: 'POST',
+			data: {json : json},
+			success: function(response) {
+				console.log(response);
+				map.closePopup();
+        alert('Your visit was registered succesfully!');
+        $('#est').val("");
+      }
+    });
+}
+
+function calcPop(pop){
+         est = Math.round(pop.reduce((a, b) => a + b) / pop.length);
+         return est; 
+      }
+
+// function dateFormat(current_date){
+//   cuurent_date = current_date.getUTCFullYear() + '-' +
+//     ('00' + (current_date.getUTCMonth()+1)).slice(-2) + '-' +
+//     ('00' + current_date.getUTCDate()).slice(-2) + ' ' + 
+//     ('00' + current_date.getUTCHours()).slice(-2) + ':' + 
+//     ('00' + current_date.getUTCMinutes()).slice(-2) + ':' + 
+//     ('00' + current_date.getUTCSeconds()).slice(-2);
+//   // console.log(json.visit_date);
+// }      
+
+function getDistance(lat1,lon1,lat2,lon2) {
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2-lat1);  // deg2rad below
+  var dLon = deg2rad(lon2-lon1); 
+  var a = 
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+    Math.sin(dLon/2) * Math.sin(dLon/2)
+    ; 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  var d = R * c; // Distance in km
+  return d;
+}
+
+function deg2rad(deg) {
+  return deg * (Math.PI/180)
+}
+
+console.log(getDistance(38.2362409, 21.7303368 ,38.2361853 ,21.7301181));
 
